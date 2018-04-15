@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
 
 //display inventory
 function displayItems(){
-    console.log ("display"); //make sure in display function
+    //console.log ("display"); //make sure in display function
     queryInventory = 'SELECT * FROM products';
 
     connection.query(queryInventory, function(err,data){
@@ -27,9 +27,9 @@ function displayItems(){
         var inventory = ' ';
         for (var i=0; i<data.length; i++){
             inventory = ' ';
-            inventory += 'Item ID Number: '+ data[i].item_id + ' -- ';
-            inventory += 'Product Name: ' + data[i].product_name + ' -- ';
-            inventory += 'Price:  ' + data[i].price + ' -- \n';
+            inventory += 'Item ID Number: '+ data[i].item_id + ' ** ';
+            inventory += 'Product Name: ' + data[i].product_name + ' ** ';
+            inventory += 'Price:  ' + data[i].price + ' ** \n';
 
             console.log (inventory);
 
@@ -47,7 +47,7 @@ function displayItems(){
 
 function purchase() {
 
-    console.log("get user imput"); //make sure in purchase function
+    //console.log("get user imput"); //make sure in purchase function
 
     inquirer.prompt([
         {
@@ -76,7 +76,7 @@ function purchase() {
 
             if( data.length === 0){
                 console.log("Please input a valid Item ID Number");
-                inventory();
+                displayItems();
             }
             else {
                 var itemInfo = data[0];
