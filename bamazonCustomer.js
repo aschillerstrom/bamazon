@@ -64,7 +64,7 @@ function purchase() {
             filter: Number
         }
     ]).then (function(input) {
-        console.log (input.item_id + "  " + input.quantity); //see if we can see what the user wants to purchase
+        //console.log (input.item_id + "  " + input.quantity); //see if we can see what the user wants to purchase
 
         var item = input.item_id;
         var quantity = input.quantity;
@@ -82,18 +82,19 @@ function purchase() {
                 var itemInfo = data[0];
 
                 if (quantity <= itemInfo.stock_quantity) {
-                    console.log ("Thank you for your purchase")
+                    console.log ("Thank you for shopping with us!")
 
-                    var updateInventory = 'UPDATE products SET stock_quantity: ' + (itemInfo.stock_quantity - quantity) + ' WHERE item_id = ' + item;
+                    var updateInventory = 'UPDATE products SET stock_quantity= ' + (itemInfo.stock_quantity - quantity) + ' WHERE item_id = ' + item;
                     connection.query(updateInventory, function(err, data){
                         if (err) throw err;
-                        console.log("Thank you for your order.  Your total is $" + (itemInfo.price*quantity) +".");
+                        console.log("Enjoy your purchase.  Your total is $" + (itemInfo.price*quantity) +".");
 
                         connection.end();
                     })
                 }
                 else{
-                    console.log ("Sorry, we cannot fill your order at this time due to low inventory.");
+                    console.log ("Sorry, we cannot fill your order at this time due to low inventory. We only have " + itemInfo.stock_quantity + " units of that item in stock.");
+                    displayItems();
                 }
             }
         })
