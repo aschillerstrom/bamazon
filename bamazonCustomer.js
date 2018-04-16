@@ -87,14 +87,14 @@ function purchase() {
                     var updateInventory = 'UPDATE products SET stock_quantity= ' + (itemInfo.stock_quantity - quantity) + ' WHERE item_id = ' + item;
                     connection.query(updateInventory, function(err, data){
                         if (err) throw err;
-                        console.log("Enjoy your purchase.  Your total is $" + (itemInfo.price*quantity) +".");
+                        console.log("Enjoy your purchase.  Your total is $" + (itemInfo.price*quantity) +"."); //calculates total
 
                         connection.end();
                     })
                 }
                 else{
                     console.log ("Sorry, we cannot fill your order at this time due to low inventory. We only have " + itemInfo.stock_quantity + " units of that item in stock.");
-                    displayItems();
+                    displayItems();      //not enough inventory and shows how much is available
                 }
             }
         })
